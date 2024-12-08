@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accountability App</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery for ease -->
+    <script src="{% static 'scripts.js' %}"></script> <!-- External JS -->
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="App Logo">
+        </div>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Daily Tasks</a></li>
+            <li><a href="#">Ziele</a></li>
+            <li><a href="#">Einstellungen</a></li>
+        </ul>
+    </nav>
+
+    <!-- Expandable Sidebar -->
+    <div class="sidebar">
+        <button class="toggle-btn" onclick="toggleSidebar()">></button>
+        <!-- Sidebar content (can add more items here) -->
+        <p>Sidebar content</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Greeting Message -->
+            <div class="greeting-message">
+                <h1>Welcome Back! Here's your To-Do List</h1>
+            </div>
+
+            <!-- Task List and Add Task Button Container -->
+            <div class="task-container">
+                <div class="task-list" id="task-list">
+                    <h2>To-Do List</h2>
+                    <ul>
+                        {% for task in tasks %}
+                            <li class="task" id="task-{{ task.id }}" draggable="true">
+                                <h3>{{ task.name }}</h3>
+                                <p>Due: {{ task.due_date }}</p>
+                                <p>{{ task.description }}</p>
+                                <p>Resources: {{ task.resources }}</p>
+                            </li>
+                        {% empty %}
+                            <li>No tasks available!</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            
+                <!-- Button for Adding Task -->
+                <button class="add-task-btn" onclick="openAddTaskModal()">Add Task +</button>
+            </div>
+
+            <!-- Add Task Modal -->
+            <div id="add-task-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn" onclick="closeAddTaskModal()">&times;</span>
+                    <h2>Add a New Task</h2>
+                    <form id="add-task-form">
+                        <input type="text" id="task-name" placeholder="Task Name" required>
+                        <input type="date" id="task-due-date" required>
+                        <textarea id="task-description" placeholder="Task Description" required></textarea>
+                        <input type="text" id="task-resources" placeholder="Resources (Optional)">
+                        <button type="submit">Add Task</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Kanban Columns -->
+            <div class="kanban-board">
+                <div class="kanban-column" id="not-started">
+                    <h3>Not Started</h3>
+                    <ul id="not-started-list" class="kanban-tasks">
+                        <!-- Dropped tasks will appear here -->
+                    </ul>
+                </div>
+                <div class="kanban-column" id="in-progress">
+                    <h3>In Progress</h3>
+                    <ul id="in-progress-list" class="kanban-tasks">
+                        <!-- Dropped tasks will appear here -->
+                    </ul>
+                </div>
+                <div class="kanban-column" id="done">
+                    <h3>Done</h3>
+                    <ul id="done-list" class="kanban-tasks">
+                        <!-- Dropped tasks will appear here -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include SortableJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
+

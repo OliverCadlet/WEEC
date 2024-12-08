@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accountability App</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery for ease -->
+    <script src="{% static 'scripts.js' %}"></script> <!-- External JS -->
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="App Logo">
+        </div>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Daily Tasks</a></li>
+            <li><a href="#">Ziele</a></li>
+            <li><a href="#">Einstellungen</a></li>
+        </ul>
+    </nav>
+
+    <!-- Expandable Sidebar -->
+    <div class="sidebar">
+        <button class="toggle-btn" onclick="toggleSidebar()">></button>
+        <!-- Sidebar content (can add more items here) -->
+        <p>Sidebar content</p>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Welcome to Your Personal Accountability App!</h1>
+        <p>This is your dashboard for staying on track!</p>
+    </div>
+
+    <script src="{% static 'scripts.js' %}"></script>
+</body>
+</html>
